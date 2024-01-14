@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 const mapAPIKey = process.env.NEXT_PUBLIC_NAVER_MAP_API_CLIENT_ID;
 
@@ -19,11 +20,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
+        <Script
+          src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${mapAPIKey}&callback=initMap`}
+          type="text/javascript"
+          strategy="beforeInteractive"
+        />
+
+        {/* <script
           defer
           type="text/javascript"
           src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${mapAPIKey}&callback=initMap`}
-        ></script>
+        ></script> */}
       </head>
       <body className={inter.className}>{children}</body>
     </html>

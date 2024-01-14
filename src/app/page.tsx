@@ -1,10 +1,9 @@
 import Image from "next/image";
-import MAP from "./components/naverMap/MAP";
+import dynamic from "next/dynamic";
+import Map from "./components/naverMap/Map";
+
+// const Map = dynamic(() => import("./components/naverMap/Map"), { ssr: false });
 
 export default function Home() {
-  return (
-    <div id="map" style={{ width: "100vw", height: "100vh" }}>
-      <MAP />
-    </div>
-  );
+  return <Map />;
 }

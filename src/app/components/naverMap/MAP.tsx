@@ -1,8 +1,18 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+
+interface PinData {
+  _id: string;
+  lat: number;
+  lng: number;
+  name: string;
+  engName: string;
+}
 
 const Map = () => {
+  const router = useRouter();
   // 지도의 중심 좌표를 표시
   const [mapCenter, setMapCenter] = useState({
     lat: 37.5080966,
@@ -14,6 +24,19 @@ const Map = () => {
     { lat: 37.5080966, lng: 127.109609 },
     { lat: 37.5106203, lng: 127.108595 },
   ];
+
+  const [pinsData, setPinsData] = useState<PinData[]>([]);
+
+  const getPins = async () => {
+    const res = await fetch("http://localhost:4000/pins", {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    const { pins }: { pins: PinData[] } = await res.json();
+    setPinsData(pins);
+    return;
+  };
 
   // 마커들을 상태로 관리
   const [markers, setMarkers] = useState<naver.maps.Marker[]>([]);
@@ -55,25 +78,24 @@ const Map = () => {
     if (window && window.naver) {
       const map = getNaverMap();
       mapRef.current = map;
+      getPins();
     }
-
-    return () => {
-      console.log("trigger end");
-    };
   }, []);
 
   useEffect(() => {
     const newMarker: naver.maps.Marker[] = [];
-    markerPositions.forEach((pos) => {
+    pinsData.forEach((pos) => {
       if (mapRef.current == null) return;
       const marker = getMarker(mapRef.current, pos);
-      console.log(marker.get("position"));
+      marker.addListener("click", () => {
+        router.push(`/summary/${pos.engName}`);
+      });
       newMarker.push(marker);
     });
     setMarkers((item) => {
       return item.concat(newMarker);
     });
-  }, []);
+  }, [pinsData]);
 
   return <div id="map" style={{ width: "100%", height: "100vh" }}></div>;
 };

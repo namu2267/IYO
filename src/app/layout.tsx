@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
+import Map from "./components/naverMap/Map";
 
 const mapAPIKey = process.env.NEXT_PUBLIC_NAVER_MAP_API_CLIENT_ID;
 
@@ -21,18 +22,18 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <Script
+          defer
           src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${mapAPIKey}&callback=initMap`}
           type="text/javascript"
           strategy="beforeInteractive"
         />
-
-        {/* <script
-          defer
-          type="text/javascript"
-          src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${mapAPIKey}&callback=initMap`}
-        ></script> */}
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className="relative">
+        <div>
+          <Map />
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

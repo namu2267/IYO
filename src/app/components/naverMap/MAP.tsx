@@ -19,21 +19,15 @@ const Map = () => {
     lng: 127.109609,
   });
 
-  // 여러 개의 마커 위치 정보 배열
-  const markerPositions = [
-    { lat: 37.5080966, lng: 127.109609 },
-    { lat: 37.5106203, lng: 127.108595 },
-  ];
-
   const [pinsData, setPinsData] = useState<PinData[]>([]);
 
   const getPins = async () => {
-    const res = await fetch("http://localhost:4000/pins", {
+    const response = await fetch("http://localhost:4000/pins", {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     });
 
-    const { pins }: { pins: PinData[] } = await res.json();
+    const { pins }: { pins: PinData[] } = await response.json();
     setPinsData(pins);
     return;
   };

@@ -54,21 +54,28 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
             </span>
           ))}
         </div>
-        <section>
-          {splitDescription?.map((sentence: string, i: number) => (
-            <p key={i}>{sentence}</p>
-          ))}
-        </section>
-        <section className="mt-20 flex flex-wrap ">
+        <div>
+          {splitDescription?.map((sentence: string, i: number) => {
+            return sentence.includes("💡") ? (
+              <p className="leading-[5em]" key={i}>
+                {sentence}
+              </p>
+            ) : (
+              <p key={i}>{sentence}</p>
+            );
+          })}
+        </div>
+
+        <div className="mt-20 flex flex-wrap ">
           {storeData.imgUrl?.map((pic: string, i: number) => (
-            <img
+            <Image
               key={i}
               src={pic}
               alt="`storePic${i}`"
               className="w-1/2 object-cover"
             />
           ))}
-        </section>
+        </div>
       </main>
     </div>
   );

@@ -13,17 +13,6 @@ export const metadata: Metadata = {
   description: "주위의 이쁜 소품샵을 알려드려요.",
 };
 
-// async function enableMocking() {
-//   if (process.env.NODE_ENV !== "development") {
-//     return;
-//   }
-
-//   const { worker } = await import("../mocks/browser");
-//   // `worker.start()` returns a Promise that resolves
-//   // once the Service Worker is up and ready to intercept requests.
-//   return worker.start();
-// }
-
 export default function RootLayout({
   children,
 }: {
@@ -33,16 +22,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <Script
+          defer
           src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${mapAPIKey}&callback=initMap`}
           type="text/javascript"
           strategy="beforeInteractive"
         />
-
-        {/* <script
-          defer
-          type="text/javascript"
-          src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${mapAPIKey}&callback=initMap`}
-        ></script> */}
       </head>
       <body className="relative">
         <div>

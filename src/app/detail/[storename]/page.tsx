@@ -42,7 +42,7 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
   const splitDescription = storeData.description?.split(".");
 
   return (
-    <div className="flex flex-col items-center bg-white fixed top-0 right-0 overflow-auto w-4/5 h-full z-500">
+    <div className="flex flex-col items-center bg-white fixed top-0 right-0 overflow-auto w-4/6 h-full z-500">
       <header>
         <h1 className="my-20 text-4xl text-center">{storeData.engName}</h1>
       </header>

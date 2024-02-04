@@ -25,6 +25,12 @@ interface MainDB {
   description: string | null; // 커스텀 설명란
   updatedAt: string; // Date String (DB에 올려놓은 날 기준 Date 객체)
   concept: string[] | null;
+  storeImages: StoreImage[];
+}
+
+interface StoreImage {
+  photoId: string;
+  file_path: string; // cdn path
 }
 
 const Page = async ({ params }: { params?: { storename: string } }) => {
@@ -38,6 +44,7 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
   const { data } = await res.json();
 
   const storeData = data as MainDB;
+  console.log(storeData);
 
   const splitDescription = storeData.description?.split(".");
 
@@ -67,12 +74,14 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
         </div>
 
         <div className="mt-20 flex flex-wrap ">
-          {storeData.imgUrl?.map((pic: string, i: number) => (
+          {storeData.storeImages?.map(({ file_path, photoId }, i) => (
             <Image
-              key={i}
-              src={pic}
-              alt="`storePic${i}`"
+              key={photoId}
+              src={file_path}
+              alt={`storePic${i}`}
               className="w-1/2 object-cover"
+              width={500}
+              height={500}
             />
           ))}
         </div>

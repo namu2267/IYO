@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Script from "next/script";
-import Map from "./components/naverMap/Map";
 
 const mapAPIKey = process.env.NEXT_PUBLIC_NAVER_MAP_API_CLIENT_ID;
 
@@ -29,10 +28,7 @@ export default function RootLayout({
         />
       </head>
       <body className="relative">
-        <div>
-          <Map />
-          {children}
-        </div>
+        <div>{children}</div>
       </body>
     </html>
   );

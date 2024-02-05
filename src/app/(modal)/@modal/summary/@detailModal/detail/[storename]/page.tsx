@@ -44,7 +44,6 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
   const { data } = await res.json();
 
   const storeData = data as MainDB;
-  console.log(storeData);
 
   const splitDescription = storeData.description?.split(".");
 

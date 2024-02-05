@@ -46,7 +46,7 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
       </header>
       <div className="my-10">
         <h1 className="text-3xl text-center">{storeData.name}</h1>
-        <Link href={`/detail/${storeParams}`}>
+        <Link href={`detail/${storeParams}`}>
           <button>디테일 페이지 이동버튼</button>
         </Link>
       </div>

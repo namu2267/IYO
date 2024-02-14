@@ -27,7 +27,7 @@ export default function RootLayout({
           strategy="beforeInteractive"
         />
       </head>
-      <body className="relative">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }

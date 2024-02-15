@@ -1,5 +1,5 @@
 import Map from "@/components/naverMap/Map";
 
-export default function Default() {
+export default function Page() {
   return <Map />;
 }

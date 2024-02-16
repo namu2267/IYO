@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import DetailRouterBtn from "@/components/routerBtn/DetailRouterBtn";
 
 interface MainDB {
   name: string; // 매장이름
@@ -51,7 +50,8 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
   const updateData = new Date(storeData.updatedAt).toISOString().slice(0, 10);
 
   return (
-    <div className="flex flex-col bg-white absolute top-0 left-0 overflow-auto w-2/6 h-full">
+    <div className="flex flex-col bg-white absolute top-0 left-0 overflow-auto w-2/6 h-full z-[101]">
+      <div className="fixed bottom-5 left-[30%]">🙉</div>
       <div className="my-10 relative">
         <div className="my-10">
           <h1 className="text-3xl text-center">{storeData.name}</h1>
@@ -128,11 +128,12 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
             <p className="ml-2">{storeData.phoneNumber}</p>
           </div>
         </main>
-
-        <div className="bg-black text-white text-center p-3 font-bold">
-          <Link href={`/detail/${storeParams}`}>상세정보 보기</Link>
-        </div>
-        {/* <DetailRouterBtn storeParams={storeParams} /> */}
+        <Link
+          href={`/detail/${storeParams}`}
+          className="bg-black text-white text-center p-3 font-bold cursor-pointer hover:bg-slate-700 block"
+        >
+          상세정보보기
+        </Link>
       </div>
 
       <header className="p-8 bg-white fixed top-0 left-0 w-2/6 h-5 z-100">

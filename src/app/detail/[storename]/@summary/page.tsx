@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import Nav from "@/components/summary/Nav";
 
 interface MainDB {
   name: string; // 매장이름
@@ -70,12 +71,7 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
             priority={true}
           />
         </div>
-        <nav className="bg-black text-white text-center p-3 font-bold">
-          <ul className="flex justify-center gap-x-20">
-            <li>길안내</li>
-            <li>공유</li>
-          </ul>
-        </nav>
+        <Nav />
         <main className="p-10 border-b-2 border-gray-300 	border-style: solid">
           <div className="flex items-center m-3">
             <div className="w-5 h-5 bg-logo-location bg-no-repeat bg-cover bg-center"></div>

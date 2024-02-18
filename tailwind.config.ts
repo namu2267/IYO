@@ -17,6 +17,7 @@ const config: Config = {
         "logo-time": "url('/assets/time.svg')",
         "logo-instagram": "url('/assets/instagram.svg')",
         "logo-phone": "url('/assets/solarPhone.svg')",
+        "btn-scrollTop": "url('/assets/arrow-top.svg')",
       },
     },
   },

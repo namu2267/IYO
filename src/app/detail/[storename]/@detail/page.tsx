@@ -36,7 +36,7 @@ interface StoreImage {
 const Page = async ({ params }: { params?: { storename: string } }) => {
   const storeParams = params?.storename;
 
-  const res = await fetch(`http://localhost:4000/detail/${storeParams}`, {
+  const res = await fetch(`https://new-todos.site/detail/${storeParams}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

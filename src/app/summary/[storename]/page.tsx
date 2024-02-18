@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import Nav from "@/components/summary/nav";
+import Nav from "@/components/summary/Nav";
 
 interface MainDB {
   name: string; // 매장이름

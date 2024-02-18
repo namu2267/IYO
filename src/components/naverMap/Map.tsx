@@ -24,7 +24,10 @@ const Map = () => {
   const getPins = async () => {
     const response = await fetch("https://new-todos.site/pins", {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
     });
 
     const { pins }: { pins: PinData[] } = await response.json();

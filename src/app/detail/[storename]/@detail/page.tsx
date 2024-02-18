@@ -38,7 +38,10 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 
   const res = await fetch(`https://new-todos.site/detail/${storeParams}`, {
     method: "GET",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
   });
 
   const { data } = await res.json();

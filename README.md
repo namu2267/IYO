@@ -6,6 +6,8 @@
 2. 프로젝트 기간 : 2024. 1. 6. ~ 2024. 2. 18.
 3. 프로젝트 참가 인원: 2명
    (프론트엔드 1명, 백엔드 1명)
+4. 협업툴: ![Notion Badge](https://img.shields.io/badge/Notion-000?logo=notion&logoColor=fff&style=plastic) ![Discord Badge](https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=fff&style=plastic)
+5. 배포툴: ![Vercel Badge](https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=fff&style=plastic)
 
 <br />
 
@@ -18,14 +20,14 @@
 > 이 페이지에서 쓰이는 사진은 업체제공사진과 내가 직접 찍은 사진들이다.<br> 대략적인 기획 후에는 Figma를 통해 UI를 만들었다. 이렇게 만든 UI를 바탕으로 next.js로 작업하였다.<br>
 > 낮에는 시간이 나지 않아, 주로 저녁시간과 주말을 이용하여 작업하였다.
 
----
+## <br />
 
 ## ✔️ 본 프로젝트에서 내가 지향한 것
 
 > next.js를 제대로 이해하고 사용하고 싶었다. <br>
 > 따라서 최대한 page.tsx에서는 'use client'를 사용하지 않도록 노력했다. next.js의 최대 장점 중 하나가 바로 SEO라고 생각하기 때문에 그 장점을 최대한 살리는 방향으로 코드를 짜고자 했다. 유저의 이벤트가 발생하는 부분만 컴포넌트로 빼서 CRS이 이루어지게 했고, 정적으로 정보를 표현하는 부분들은 SSR이 이루어지도록 했다.
 
----
+## <br />
 
 <br>
 
@@ -164,13 +166,13 @@ $ npm run dev
            |-- summary
                |-- Nav.tsx
 
----
+## <br />
 
 ## 🖥️ 구현 기능
 
 ### 네이버Map API를 활용한 지도기능
 
-#### 1. mapOptions를 통한 customized된 지도의 활용
+#### 1. `mapOptions`를 통한 customized된 지도의 활용
 
 ```typescript
 const mapOptions = {
@@ -185,14 +187,15 @@ const mapOptions = {
 };
 ```
 
-- mapCenter의 초기값을 지정하여 첫 화면에 항상 송리단길이 뜨도록 했다.
-- zoomControl을 true로 지정하여 화면에 유저가 직접 줌 레벨을 컨트롤할 수 있는 컨트롤러를 띄운다.
-- zoomControlOptions로 줌 컨트롤러의 세부적인 옵션을 지정한다. 줌 컨트롤러의 사이즈는 small, 위치는 오른쪽 센터로 한다.
-- zoom:16을 통해서 초기의 룸 레벨을 16으로 지정했다.
+- `mapCenter`의 초기값을 지정하여 첫 화면에 항상 송리단길이 뜨도록 했다.
+- `zoomControl`을 true로 지정하여 화면에 유저가 직접 줌 레벨을 컨트롤할 수 있는 컨트롤러를 띄운다.
+- `zoomControlOptions`로 줌 컨트롤러의 세부적인 옵션을 지정한다. 줌 컨트롤러의 사이즈는 small, 위치는 오른쪽 센터로 한다.
+- `zoom`:16을 통해서 초기의 룸 레벨을 16으로 지정했다.
+  <br>
 
-#### 2. naver.maps.Marker를 이용한 원하는 소품샵의 마커만들기
+#### 2. `naver.maps.Marker`를 이용한 원하는 소품샵의 마커만들기
 
-- 원하는 위치에 마커를 생성하기 위해 naver.maps.Marker클래스 객체를 생성한다.
+- 원하는 위치에 마커를 생성하기 위해 `naver.maps.Marker`클래스 객체를 생성한다.
 
 ```typescript
 const getMarker = (map: naver.maps.Map, pos: { lat: number; lng: number }) => {
@@ -204,7 +207,7 @@ const getMarker = (map: naver.maps.Map, pos: { lat: number; lng: number }) => {
 };
 ```
 
-- 소품샵의 데이터를 fetch()를 통해 서버에서 받아온다. <br>
+- 소품샵의 데이터를 `fetch()`를 통해 서버에서 받아온다. <br>
   ("Access-Control-Allow-Origin"은 cors에러로 인해 임시적으로 지정하였다)
 
 ```typescript
@@ -225,10 +228,12 @@ const getPins = async () => {
 };
 ```
 
+<br>
+
 #### 3. User가 클릭한 마커의 Summary페이지로 이동하기
 
-- javascript의 addEventListener의 click이벤트를 이용하여 해당 유저가 해당 마커를 클릭하였을 때 summary의 해당 소품샵으로 이동한다.
-- next.js의 client side 화면이동시 필요한 useRouter를 사용하여, /summary/pin.engName 페이지로 이동하게 한다.
+- javascript의 `addEventListener`의 click이벤트를 이용하여 해당 유저가 해당 마커를 클릭하였을 때 summary의 해당 소품샵으로 이동한다.
+- next.js의 client side 화면이동시 필요한 `useRouter`를 사용하여, /summary/pin.engName 페이지로 이동하게 한다.
 
 ```typescript
 useEffect(() => {
@@ -242,10 +247,15 @@ useEffect(() => {
 }, [pinsData]);
 ```
 
+<br>
+
 #### 💡 useEffect의 사용
 
 - <b>지도API, pin데이터API의 호출은 한번만</b>: useEffect훅을 사용하여, naverMap의 호출과 pinData를 호출하는 함수를 브라우저 첫 렌더링시에만 일어나게 한다.
 - <b>marker API의 호출은 첫렌더링시&pin데이터 변경시에<b/>: useEffect훅을 사용하여, 첫 화면렌더링시 그리고 pinsData에 변화가 있을때만 getMarker()를 통해 마커를 변경하도록 한다.
+
+<br>
+<br>
 
 ### next.js의 폴더구조를 통한 라우팅
 
@@ -261,6 +271,8 @@ useEffect(() => {
 - parallel routes는 fallback이 발생하여 404에러가 뜰 수 있으므로 default.tsx를 만들어 이를 해결하였다.
 
 - <i>(처음에는 3중중첩라우팅을 하였으나 새로고침시에 fallback으로 빠지는 오류가 발생하여 위와 같은 방식으로 바꾸게 되었다. next.js의 폴더구조에 대한 이해부족을 원인으로 생각하여 더 공부한 뒤, 추후에 다른 방식을 더 생각해 볼 예정이다.)</i>
+
+<br>
 
 #### 2.[slug]통한 Dynamic Routes 구현
 
@@ -297,6 +309,7 @@ detail 페이지에는 많은 이미지를 포함하고 있기 때문에 lazy lo
 ```
 
 <br>
+<br>
 
 ### params를 통해 파라미터에 접근, 서버 API받아오기
 
@@ -321,8 +334,10 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 };
 ```
 
+<br>
+
 ---
 
 ## 🚀 추후 일정
 
-vercel로 배포를 완료했지만 더 추가하고 싶은 기능들이 있고, 디자인적으로도 더 보완이 필요하다. IYO프로젝트는 CICD를 통해서 develop해 나갈 예정이다.
+vercel로 배포를 완료했지만 더 추가하고 싶은 기능들이 있고, 디자인적으로도 더 보완이 필요하다. <br> 특히, meta태그, robust.txt를 활용하여 SEO에 최적화시키고 싶다. <br> IYO프로젝트는 CICD를 통해서 develop해 나갈 예정이다.

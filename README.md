@@ -252,7 +252,7 @@ useEffect(() => {
 #### 💡 useEffect의 사용
 
 - <b>지도API, pin데이터API의 호출은 한번만</b>: useEffect훅을 사용하여, naverMap의 호출과 pinData를 호출하는 함수를 브라우저 첫 렌더링시에만 일어나게 한다.
-- <b>marker API의 호출은 첫렌더링시&pin데이터 변경시에<b/>: useEffect훅을 사용하여, 첫 화면렌더링시 그리고 pinsData에 변화가 있을때만 getMarker()를 통해 마커를 변경하도록 한다.
+- <b>marker API의 호출은 첫렌더링시&pin데이터 변경시에</b>: useEffect훅을 사용하여, 첫 화면렌더링시 그리고 pinsData에 변화가 있을때만 getMarker()를 통해 마커를 변경하도록 한다.
 
 <br>
 <br>

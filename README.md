@@ -1,36 +1,328 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# IYO
 
-## Getting Started
+## 💡 프로젝트 정보
 
-First, run the development server:
+1. 프로젝트 명 : IYO
+2. 프로젝트 기간 : 2024. 1. 6. ~ 2024. 2. 18.
+3. 프로젝트 참가 인원: 2명
+   (프론트엔드 1명, 백엔드 1명)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+<br />
+
+---
+
+## 👀 프로젝트 배경
+
+> 평소 여러 동네를 구경다니고, 소품샵에 가는 것을 좋아한다. <br>
+> 이런 정보만을 담고 있는 사이트가 있으면 좋을 것 같은데 생각보다 정보를 찾기가 쉽지 않았다. 인터넷에는 정보들이 넘쳐나지만 소품샵에 대한 정보를 얻기 위해서는 그 정보의 조각들을 모아야 했다. 그래서 생각난 프로젝트가 바로 소품샵 사이트 IYO이다! <br> 페르소나는 나 자신 + 소품에 조금 더 관심이 많은 사람으로 기획하였고, 해당 사이트에 정보를 넣기 위해서 직접 소품샵에 방문하여 소품에 대한 소개문도 작성하였다.
+> 이 페이지에서 쓰이는 사진은 업체제공사진과 내가 직접 찍은 사진들이다.<br> 대략적인 기획 후에는 Figma를 통해 UI를 만들었다. 이렇게 만든 UI를 바탕으로 next.js로 작업하였다.<br>
+> 낮에는 시간이 나지 않아, 주로 저녁시간과 주말을 이용하여 작업하였다.
+
+---
+
+## ✔️ 본 프로젝트에서 내가 지향한 것
+
+> next.js를 제대로 이해하고 사용하고 싶었다. <br>
+> 따라서 최대한 page.tsx에서는 'use client'를 사용하지 않도록 노력했다. next.js의 최대 장점 중 하나가 바로 SEO라고 생각하기 때문에 그 장점을 최대한 살리는 방향으로 코드를 짜고자 했다. 유저의 이벤트가 발생하는 부분만 컴포넌트로 빼서 CRS이 이루어지게 했고, 정적으로 정보를 표현하는 부분들은 SSR이 이루어지도록 했다.
+
+---
+
+<br>
+
+## ▶️ 실행 방법
+
+```shell
+# 프론트엔드 프로젝트 (node version v21.6.0 사용 중)
+$ git clone https://github.com/namu2267/IYO.git
+$ cd IYO
+$ npm install
+$ npm run dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<br />
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## ⭐ 배포 링크
 
-## Learn More
+<br/>
 
-To learn more about Next.js, take a look at the following resources:
+> https://iyo.vercel.app/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<br/>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📚 사용 기술 스택
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<br />
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![react](https://img.shields.io/badge/react-18.2.0-61DAFB?logo=react)
+![next.js](https://img.shields.io/badge/next.js-14.0.4-000000?logo=nextdotjs)  
+![typescript](https://img.shields.io/badge/typescript-5.3.3-3178C6?logo=typescript)
+![tailwind](https://img.shields.io/badge/tailwindcss-3.3.0-0F172A?&logo=tailwindcss)
+![Figma Badge](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=fff&style=flat)
+
+### **선정 이유**
+
+#### ![](https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+
+1. 서버사이드 렌더링(SSR)과 클라이언트사이드 렌더링(CSR)을 모두 사용함으로써 각각의 장점을 취할 수 있다.
+
+- _SSR_
+
+  - <b>초기 로딩 속도의 증가</b>: CSR과 비교하여 빠른 초기 로딩속도
+  - <b>SEO최적화</b>: CSR처럼 root를 통해 Javascript를 주입하는 것이 아니라, HTML파일로 직접 전달하기 때문에 검색엔진이 접근가능한 구조
+
+- _CSR_
+  - 필요한 부분만 CSR방식으로 컴포넌트화 가능
+  - 유저의 이벤트가 발생하는 부분만 CSR을 사용하여 빠른 로딩을 통한 더 나은 UX제공 가능
+
+2. App라우터
+
+- React-Router-dom라이브러리의 설치 불필요. nextjs안에 내장되어있는 App라우터를 통하여 <b>폴더구조만으로 라우팅 실현 가능</b>
+
+3. Image Optimization
+
+- 자체내장된 `<Image />` 태그를 통해서 이미지 최적화
+- <b>WebP 및 AVIF사용</b>: WebP 및 AVIF와 같은 최신 이미지 형식을 사용하여 각 장치에 올바른 크기의 이미지를 자동으로 제공 -<b>Lazy로딩</b>:  브라우저 지연 로딩을 사용하여 뷰포트에 들어갈 때만 로드
+
+<br>
+
+![](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square)
+
+1. 동적으로 타입이 지정되는 JavaScript를 보완
+2. 컴파일 단계의 에러뿐만 아니라, 의도하지 않은 타입으로의 변환되는것을 사전에 방지 가능
+
+<br>
+
+![](https://img.shields.io/badge/tailwindcss-0F172A?&logo=tailwindcss)
+
+1. 스타일 일관성
+
+- 지정된 스타일을 통해 프로젝트 전반의 스타일에 일관성 부여 가능
+
+2. 클래스명의 일관성
+
+- 지정된 클래스명을 통해 클래스명만으로도 어떤 스타일을 부여한 것인지 추론 가능
+- 클래스명을 일일이 부여하지 않아도 됨
+
+3. CSS ↔️ HTML 사이의 컨텍스트 전환의 용이
+
+- css파일 혹은 `<style>`블록으로의 전환이 필요없음
+
+<br>
+
+![Figma Badge](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=fff&style=flat)
+
+1. 유저에게 보일 화면을 코드화하기 전에 미리 만들어볼 수 있음
+2. 유저의 입장에서 예측하면서 만듦으로써 UXUI적인 측면에서 한번 더 생각해볼 수 있음
+
+<br />
+
+---
+
+## 📁 폴더 구조
+
+    root
+    |-- tsconfig.json
+    |-- README.md
+    |-- package.json
+    |-- package.lock.json
+    |-- next.config.json
+    |-- tailwind.config.json
+    |-- postcss.config.json
+    |-- eslintrc.json
+    |-- gitignore
+    |-- public
+    |   |-- assets
+    |-- src
+        |-- app
+           |-- detail
+               |-- [storename]
+                   |-- @detail
+                        |-- default.tsx
+                        |-- page.tsx
+                   |-- @summary
+                        |-- default.tsx
+                        |-- page.tsx
+                   |-- default.tsx
+                   |-- layout.tsx
+                   |-- page.tsx
+           |-- summary
+               |-- [storename]
+                   |-- page.tsx
+               |-- layout.tsx
+           |-- globals.css
+           |-- layout.tsx
+           |-- not-found.tsx
+           |-- page.tsx
+        |-- components
+           |-- naverMap
+               |-- Map.tsx
+           |-- summary
+               |-- Nav.tsx
+
+---
+
+## 🖥️ 구현 기능
+
+### 네이버Map API를 활용한 지도기능
+
+#### 1. mapOptions를 통한 customized된 지도의 활용
+
+```typescript
+const mapOptions = {
+  center: new naver.maps.LatLng(mapCenter.lat, mapCenter.lng),
+  mapTypeControl: true,
+  zoomControl: true,
+  zoomControlOptions: {
+    style: naver.maps.ZoomControlStyle.SMALL,
+    position: naver.maps.Position.RIGHT_CENTER,
+  },
+  zoom: 16,
+};
+```
+
+- mapCenter의 초기값을 지정하여 첫 화면에 항상 송리단길이 뜨도록 했다.
+- zoomControl을 true로 지정하여 화면에 유저가 직접 줌 레벨을 컨트롤할 수 있는 컨트롤러를 띄운다.
+- zoomControlOptions로 줌 컨트롤러의 세부적인 옵션을 지정한다. 줌 컨트롤러의 사이즈는 small, 위치는 오른쪽 센터로 한다.
+- zoom:16을 통해서 초기의 룸 레벨을 16으로 지정했다.
+
+#### 2. naver.maps.Marker를 이용한 원하는 소품샵의 마커만들기
+
+- 원하는 위치에 마커를 생성하기 위해 naver.maps.Marker클래스 객체를 생성한다.
+
+```typescript
+const getMarker = (map: naver.maps.Map, pos: { lat: number; lng: number }) => {
+  const marker = new naver.maps.Marker({
+    position: new naver.maps.LatLng(pos.lat, pos.lng),
+    map,
+  });
+  return marker;
+};
+```
+
+- 소품샵의 데이터를 fetch()를 통해 서버에서 받아온다. <br>
+  ("Access-Control-Allow-Origin"은 cors에러로 인해 임시적으로 지정하였다)
+
+```typescript
+const [pinsData, setPinsData] = useState<PinData[]>([]);
+
+const getPins = async () => {
+  const response = await fetch("https://new-todos.site/pins", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+
+  const { pins }: { pins: PinData[] } = await response.json();
+  setPinsData(pins);
+  return;
+};
+```
+
+#### 3. User가 클릭한 마커의 Summary페이지로 이동하기
+
+- javascript의 addEventListener의 click이벤트를 이용하여 해당 유저가 해당 마커를 클릭하였을 때 summary의 해당 소품샵으로 이동한다.
+- next.js의 client side 화면이동시 필요한 useRouter를 사용하여, /summary/pin.engName 페이지로 이동하게 한다.
+
+```typescript
+useEffect(() => {
+  pinsData.forEach((pin) => {
+    if (mapRef.current == null) return;
+    const marker = getMarker(mapRef.current, pin);
+    marker.addListener("click", () => {
+      router.push(`/summary/${pin.engName}`);
+    });
+  });
+}, [pinsData]);
+```
+
+#### 💡 useEffect의 사용
+
+- <b>지도API, pin데이터API의 호출은 한번만</b>: useEffect훅을 사용하여, naverMap의 호출과 pinData를 호출하는 함수를 브라우저 첫 렌더링시에만 일어나게 한다.
+- <b>marker API의 호출은 첫렌더링시&pin데이터 변경시에<b/>: useEffect훅을 사용하여, 첫 화면렌더링시 그리고 pinsData에 변화가 있을때만 getMarker()를 통해 마커를 변경하도록 한다.
+
+### next.js의 폴더구조를 통한 라우팅
+
+#### 1. parallel routes를 통한 병렬라우팅 구현
+
+- next.js의 @를 이용하여 2개의 다른 페이지를 한 화면에서 볼 수 있도록 parallel 라우팅을 구현하였다.
+
+  <img width="262" alt="스크린샷 2024-02-19 오후 7 32 04" src="https://github.com/namu2267/IYO/assets/104307414/849e809c-195b-4c61-9bd4-8ceffad3fde7">
+
+![@@](https://github.com/namu2267/IYO/assets/104307414/e254a762-e62e-44ca-aa31-8a9b3d5b942d)
+<br>
+
+- parallel routes는 fallback이 발생하여 404에러가 뜰 수 있으므로 default.tsx를 만들어 이를 해결하였다.
+
+- <i>(처음에는 3중중첩라우팅을 하였으나 새로고침시에 fallback으로 빠지는 오류가 발생하여 위와 같은 방식으로 바꾸게 되었다. next.js의 폴더구조에 대한 이해부족을 원인으로 생각하여 더 공부한 뒤, 추후에 다른 방식을 더 생각해 볼 예정이다.)</i>
+
+#### 2.[slug]통한 Dynamic Routes 구현
+
+- next.js의 [slug]를 이용하여 파라미터를 동적으로 라우팅한다.
+  <img width="232" alt="스크린샷 2024-02-19 오후 7 50 48" src="https://github.com/namu2267/IYO/assets/104307414/5988999b-1c5e-4be1-950c-6fe56524047e">
+
+<br>
+
+### next.js `<Image>`태그를 통한 이미지 최적화
+
+- Webp로 자동변환 ➡️ 메모리 절약
+
+next.js는 자동으로 이미지를 webp처럼 용량이 작은 파일로 변환해준다. AWS의 용량문제로 이미 webp로 변환하여 올렸지만, 추후에 jpg나 png이미지를 사용할 일이 있을 것이다.
+
+- lazy loading
+
+detail 페이지에는 많은 이미지를 포함하고 있기 때문에 lazy loading을 통해서 필요한 부분의 이미지만을 로딩한다.
+
+- priority
+  summary 페이지의 메인이미지는 유저가 누르면 바로 보여야 하기 때문에 lazy loading이 되면 안된다. 따라서 이 기능을 끄기 위해서 속성에 priority를 부여하였다.
+
+```typescript
+<div className="relative w-full h-96">
+  <Image
+    key={storeData.storeImages[0].photoId}
+    src={storeData.storeImages[0].file_path}
+    alt={storeData.engName + "메인사진"}
+    fill
+    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+    style={{ objectFit: "cover" }}
+    priority={true}
+  />
+</div>
+```
+
+<br>
+
+### params를 통해 파라미터에 접근, 서버 API받아오기
+
+- url파라미터에 동적으로 접근하기 위해서 params를 사용하였다.
+- 이렇게 얻은 파라미터를 이용하여 서버에서 API를 받아왔다.
+- page자체가 서버사이드 렌더링 방식이기때문에 받아올 때는 fetch()함수를 이용하였다.
+
+```typescript
+const Page = async ({ params }: { params?: { storename: string } }) => {
+  const storeParams = params?.storename;
+
+  const res = await fetch(`https://new-todos.site/detail/${storeParams}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+
+  const { data } = await res.json();
+  const storeData = data as MainDB;
+};
+```
+
+---
+
+## 🚀 추후 일정
+
+vercel로 배포를 완료했지만 더 추가하고 싶은 기능들이 있고, 디자인적으로도 더 보완이 필요하다. IYO프로젝트는 CICD를 통해서 develop해 나갈 예정이다.

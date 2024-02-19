@@ -65,9 +65,7 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
             key={storeData.storeImages[0].photoId}
             src={storeData.storeImages[0].file_path}
             alt={storeData.engName + "메인사진"}
-            width={0}
-            height={0}
-            fill={true}
+            fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             style={{ objectFit: "cover" }}
             priority={true}

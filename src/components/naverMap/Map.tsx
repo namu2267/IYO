@@ -35,9 +35,6 @@ const Map = () => {
     return;
   };
 
-  // 마커들을 상태로 관리
-  const [markers, setMarkers] = useState<naver.maps.Marker[]>([]);
-
   const getNaverMap = () => {
     const mapOptions = {
       center: new naver.maps.LatLng(mapCenter.lat, mapCenter.lng),
@@ -80,17 +77,13 @@ const Map = () => {
   }, []);
 
   useEffect(() => {
-    const newMarker: naver.maps.Marker[] = [];
-    pinsData.forEach((pos) => {
+    pinsData.forEach((pin) => {
+      console.log("pin", pin);
       if (mapRef.current == null) return;
-      const marker = getMarker(mapRef.current, pos);
+      const marker = getMarker(mapRef.current, pin);
       marker.addListener("click", () => {
-        router.push(`/summary/${pos.engName}`);
+        router.push(`/summary/${pin.engName}`);
       });
-      newMarker.push(marker);
-    });
-    setMarkers((item) => {
-      return item.concat(newMarker);
     });
   }, [pinsData]);
 

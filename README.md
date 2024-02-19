@@ -249,7 +249,7 @@ useEffect(() => {
 
 <br>
 
-#### 💡 useEffect의 사용
+#### 💡 `useEffect`의 사용
 
 - <b>지도API, pin데이터API의 호출은 한번만</b>: useEffect훅을 사용하여, naverMap의 호출과 pinData를 호출하는 함수를 브라우저 첫 렌더링시에만 일어나게 한다.
 - <b>marker API의 호출은 첫렌더링시&pin데이터 변경시에</b>: useEffect훅을 사용하여, 첫 화면렌더링시 그리고 pinsData에 변화가 있을때만 getMarker()를 통해 마커를 변경하도록 한다.
@@ -259,9 +259,9 @@ useEffect(() => {
 
 ### next.js의 폴더구조를 통한 라우팅
 
-#### 1. parallel routes를 통한 병렬라우팅 구현
+#### 1. `parallel routes`를 통한 병렬라우팅 구현
 
-- next.js의 @를 이용하여 2개의 다른 페이지를 한 화면에서 볼 수 있도록 parallel 라우팅을 구현하였다.
+- next.js의 @를 이용하여 <u>2개의 다른 페이지를 한 화면에서 볼 수 있도록</u> parallel 라우팅을 구현하였다.
 
   <img width="262" alt="스크린샷 2024-02-19 오후 7 32 04" src="https://github.com/namu2267/IYO/assets/104307414/849e809c-195b-4c61-9bd4-8ceffad3fde7">
 
@@ -274,7 +274,7 @@ useEffect(() => {
 
 <br>
 
-#### 2.[slug]통한 Dynamic Routes 구현
+#### 2.`[slug]`통한 Dynamic Routes 구현
 
 - next.js의 [slug]를 이용하여 파라미터를 동적으로 라우팅한다.
   <img width="232" alt="스크린샷 2024-02-19 오후 7 50 48" src="https://github.com/namu2267/IYO/assets/104307414/5988999b-1c5e-4be1-950c-6fe56524047e">
@@ -283,15 +283,15 @@ useEffect(() => {
 
 ### next.js `<Image>`태그를 통한 이미지 최적화
 
-- Webp로 자동변환 ➡️ 메모리 절약
+- `Webp`로 자동변환 ➡️ 메모리 절약
 
 next.js는 자동으로 이미지를 webp처럼 용량이 작은 파일로 변환해준다. AWS의 용량문제로 이미 webp로 변환하여 올렸지만, 추후에 jpg나 png이미지를 사용할 일이 있을 것이다.
 
-- lazy loading
+- `lazy loadin`g`
 
 detail 페이지에는 많은 이미지를 포함하고 있기 때문에 lazy loading을 통해서 필요한 부분의 이미지만을 로딩한다.
 
-- priority
+- `priority`
   summary 페이지의 메인이미지는 유저가 누르면 바로 보여야 하기 때문에 lazy loading이 되면 안된다. 따라서 이 기능을 끄기 위해서 속성에 priority를 부여하였다.
 
 ```typescript
@@ -311,11 +311,11 @@ detail 페이지에는 많은 이미지를 포함하고 있기 때문에 lazy lo
 <br>
 <br>
 
-### params를 통해 파라미터에 접근, 서버 API받아오기
+### `params`를 통해 파라미터에 접근, 서버 API받아오기
 
 - url파라미터에 동적으로 접근하기 위해서 params를 사용하였다.
-- 이렇게 얻은 파라미터를 이용하여 서버에서 API를 받아왔다.
-- page자체가 서버사이드 렌더링 방식이기때문에 받아올 때는 fetch()함수를 이용하였다.
+- 이렇게 얻은 파라미터를 이용하여 서버에서 API를 받아온다.
+- page자체가 서버사이드 렌더링 방식이기때문에 받아올 때는 `fetch()`함수를 이용하였다.
 
 ```typescript
 const Page = async ({ params }: { params?: { storename: string } }) => {

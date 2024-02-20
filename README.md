@@ -25,20 +25,30 @@
 ## ✔️ 본 프로젝트에서 내가 지향한 것
 
 > next.js를 제대로 이해하고 사용하고 싶었다. <br>
-> 따라서 최대한 page.tsx에서는 'use client'를 사용하지 않도록 노력했다. next.js의 최대 장점 중 하나가 바로 SEO라고 생각하기 때문에 그 장점을 최대한 살리는 방향으로 코드를 짜고자 했다. 유저의 이벤트가 발생하는 부분만 컴포넌트로 빼서 CRS이 이루어지게 했고, 정적으로 정보를 표현하는 부분들은 SSR이 이루어지도록 했다.
+> 따라서 최대한 page.tsx에서는 'use client'를 사용하지 않도록 노력했다. next.js의 최대 장점 중 하나가 바로 SEO라고 생각하기 때문에 그 장점을 최대한 살리는 방향으로 코드를 짜고자 했다. 유저의 이벤트가 발생하는 부분만 컴포넌트로 빼서 CSR이 이루어지게 했고, 정적으로 정보를 표현하는 부분들은 SSR이 이루어지도록 했다.
 
 ## <br />
-
-<br>
 
 ## ▶️ 실행 방법
 
 ```shell
-# 프론트엔드 프로젝트 (node version v21.6.0 사용 중)
+# 프론트엔드 (node version v21.6.0 사용 중)
 $ git clone https://github.com/namu2267/IYO.git
-$ cd IYO
+$ cd iyo
 $ npm install
 $ npm run dev
+
+```
+
+## ▶️ 서버가 부재할 경우를 대비한 백엔드 실행방법
+
+```shell
+# 백엔드 (node version v21.6.0 사용 중)
+$ git clone https://github.com/hjpark625/iyo-backend.git
+$ cd iyo-backend
+$ npm install
+$ nvm use
+$ pnpm run start:dev
 
 ```
 
@@ -64,7 +74,6 @@ $ npm run dev
 ![next.js](https://img.shields.io/badge/next.js-14.0.4-000000?logo=nextdotjs)  
 ![typescript](https://img.shields.io/badge/typescript-5.3.3-3178C6?logo=typescript)
 ![tailwind](https://img.shields.io/badge/tailwindcss-3.3.0-0F172A?&logo=tailwindcss)
-![Figma Badge](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=fff&style=flat)
 
 ### **선정 이유**
 
@@ -83,19 +92,21 @@ $ npm run dev
 
 2. App라우터
 
-- React-Router-dom라이브러리의 설치 불필요. nextjs안에 내장되어있는 App라우터를 통하여 <b>폴더구조만으로 라우팅 실현 가능</b>
+- React-Router-dom라이브러리의 설치 불필요. <br>
+  next.js안에 내장되어있는 App라우터를 통하여 <b>폴더구조만으로 라우팅 실현 가능</b>
 
 3. Image Optimization
 
-- 자체내장된 `<Image />` 태그를 통해서 이미지 최적화
-- <b>WebP 및 AVIF사용</b>: WebP 및 AVIF와 같은 최신 이미지 형식을 사용하여 각 장치에 올바른 크기의 이미지를 자동으로 제공 -<b>Lazy로딩</b>:  브라우저 지연 로딩을 사용하여 뷰포트에 들어갈 때만 로드
+- _자체내장된 `<Image />` 태그를 통해서 이미지 최적화_
+  - <b>WebP 및 AVIF사용</b>: WebP 및 AVIF와 같은 최신 이미지 형식을 사용하여 각 장치에 올바른 크기의 이미지를 자동으로 제공
+  - <b>Lazy로딩</b>:  브라우저 지연 로딩을 사용하여 뷰포트에 들어갈 때만 로드
 
 <br>
 
 ![](https://shields.io/badge/TypeScript-3178C6?logo=TypeScript&logoColor=FFF&style=flat-square)
 
 1. 동적으로 타입이 지정되는 JavaScript를 보완
-2. 컴파일 단계의 에러뿐만 아니라, 의도하지 않은 타입으로의 변환되는것을 사전에 방지 가능
+2. 컴파일 단계의 에러뿐만 아니라, 의도하지 않은 타입으로 변환되는 것을 사전에 방지
 
 <br>
 
@@ -103,7 +114,7 @@ $ npm run dev
 
 1. 스타일 일관성
 
-- 지정된 스타일을 통해 프로젝트 전반의 스타일에 일관성 부여 가능
+- 지정된 스타일을 통해 프로젝트 전반의 스타일에 일관성 부여
 
 2. 클래스명의 일관성
 
@@ -115,13 +126,6 @@ $ npm run dev
 - css파일 혹은 `<style>`블록으로의 전환이 필요없음
 
 <br>
-
-![Figma Badge](https://img.shields.io/badge/Figma-F24E1E?logo=figma&logoColor=fff&style=flat)
-
-1. 유저에게 보일 화면을 코드화하기 전에 미리 만들어볼 수 있음
-2. 유저의 입장에서 예측하면서 만듦으로써 UXUI적인 측면에서 한번 더 생각해볼 수 있음
-
-<br />
 
 ---
 
@@ -166,7 +170,19 @@ $ npm run dev
            |-- summary
                |-- Nav.tsx
 
-## <br />
+ <br />
+
+---
+
+## 🌑 .env
+
+```
+NEXT_PUBLIC_NAVER_API_KEY=발급받은 개인 naverAPI KEY
+```
+
+<br>
+
+---
 
 ## 🖥️ 구현 기능
 
@@ -233,7 +249,7 @@ const getPins = async () => {
 #### 3. User가 클릭한 마커의 Summary페이지로 이동하기
 
 - javascript의 `addEventListener`의 click이벤트를 이용하여 해당 유저가 해당 마커를 클릭하였을 때 summary의 해당 소품샵으로 이동한다.
-- next.js의 client side 화면이동시 필요한 `useRouter`를 사용하여, /summary/pin.engName 페이지로 이동하게 한다.
+- next.js의 client side 화면이동시 필요한 `useRouter`를 사용하여, /summary/pin.engName 페이지로 이동한다.
 
 ```typescript
 useEffect(() => {
@@ -251,8 +267,8 @@ useEffect(() => {
 
 #### 💡 `useEffect`의 사용
 
-- <b>지도API, pin데이터API의 호출은 한번만</b>: useEffect훅을 사용하여, naverMap의 호출과 pinData를 호출하는 함수를 브라우저 첫 렌더링시에만 일어나게 한다.
-- <b>marker API의 호출은 첫렌더링시&pin데이터 변경시에</b>: useEffect훅을 사용하여, 첫 화면렌더링시 그리고 pinsData에 변화가 있을때만 getMarker()를 통해 마커를 변경하도록 한다.
+- <b>지도API, pin데이터API의 호출은 한번만</b>: <br> useEffect훅을 사용하여, naverMap의 호출과 pinData를 호출하는 함수를 브라우저 첫 렌더링시에만 일어나게 한다.
+- <b>marker API의 호출은 첫렌더링시&pin데이터 변경시에</b>: <br> useEffect훅을 사용하여, 첫 화면렌더링시 그리고 pinsData에 변화가 있을때만 getMarker()를 통해 마커를 변경하도록 한다.
 
 <br>
 <br>
@@ -283,16 +299,21 @@ useEffect(() => {
 
 ### next.js `<Image>`태그를 통한 이미지 최적화
 
-- `Webp`로 자동변환 ➡️ 메모리 절약
+1. `Webp`로 자동변환 ➡️ 메모리 절약
 
-next.js는 자동으로 이미지를 webp처럼 용량이 작은 파일로 변환해준다. AWS의 용량문제로 이미 webp로 변환하여 올렸지만, 추후에 jpg나 png이미지를 사용할 일이 있을 것이다.
+- next.js는 자동으로 이미지를 webp처럼 용량이 작은 파일로 변환해준다. AWS의 용량문제로 이미 webp로 변환하여 올렸지만, 추후에 jpg나 png이미지를 사용할 일이 있을 것이라 생각하였다.
 
-- `lazy loadin`g`
+2. 이미지 `사이즈 최적화`
 
-detail 페이지에는 많은 이미지를 포함하고 있기 때문에 lazy loading을 통해서 필요한 부분의 이미지만을 로딩한다.
+- next.js의 <Image/>는 디바이스 크기에 따른 srcSet을 제공하여, 사용자의 디바이스에 맞는 이미지를 다운로드한다. (디바이스에 맞는 이미지 사이즈를 만들고나서 webp로 변환환다.) <br> ➡️ 이를 통해 불필요하게 큰 이미지를 다운로드하는 것을 방지할 수 있다.
 
-- `priority`
-  summary 페이지의 메인이미지는 유저가 누르면 바로 보여야 하기 때문에 lazy loading이 되면 안된다. 따라서 이 기능을 끄기 위해서 속성에 priority를 부여하였다.
+3. `lazy loading`
+
+- detail 페이지에는 많은 이미지를 포함하고 있기 때문에 lazy loading을 통해서 필요한 부분의 이미지만을 로딩한다.
+
+4. `priority`
+
+- summary 페이지의 메인이미지는 유저가 누르면 바로 보여야 하기 때문에 lazy loading이 되면 안된다. 따라서 이 기능을 끄기 위해서 속성에 priority를 부여하였다.
 
 ```typescript
 <div className="relative w-full h-96">
@@ -316,6 +337,7 @@ detail 페이지에는 많은 이미지를 포함하고 있기 때문에 lazy lo
 - url파라미터에 동적으로 접근하기 위해서 params를 사용하였다.
 - 이렇게 얻은 파라미터를 이용하여 서버에서 API를 받아온다.
 - page자체가 서버사이드 렌더링 방식이기때문에 받아올 때는 `fetch()`함수를 이용하였다.
+- next.js의 page.tsx는 컴포넌트 자체에 `async`를 걸 수 있기 때문에 fetch()를 받아올 때 <u>useEffect를 사용하지 않고</u> 바로 `await`를 사용하였다.
 
 ```typescript
 const Page = async ({ params }: { params?: { storename: string } }) => {
@@ -337,6 +359,12 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 <br>
 
 ---
+
+## 시연영상
+
+![IYO 화면기록](https://github.com/namu2267/IYO/assets/104307414/d10ccfd9-eace-4d70-a2f5-a9f9f9750286)
+
+## <br>
 
 ## 🚀 추후 일정
 

@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url("/fonts/Pretendard-Regular.woff2");
+}
+
+body {
+  font-family: "Pretendard-Regular";
+}
+
 /* html {
   --scroll-behavior: smooth !important;
   scroll-behavior: smooth !important;

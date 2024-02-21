@@ -142,7 +142,8 @@ $ pnpm run start:dev
     |-- eslintrc.json
     |-- gitignore
     |-- public
-    |   |-- assets
+        |-- assets
+        |-- fonts
     |-- src
         |-- app
            |-- detail
@@ -174,7 +175,7 @@ $ pnpm run start:dev
 
 ---
 
-## 🌑 .env
+##🌚 .env
 
 ```
 NEXT_PUBLIC_NAVER_API_KEY=발급받은 개인 naverAPI KEY
@@ -360,9 +361,24 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 
 ---
 
+## 이 프로젝트에서 가장 어려웠던 점
+
+### Next.js의 폴더구조를 이용한 중첩라우팅
+
+- Next.js의 폴더구조를 이용한 중첩라우팅은 이 프로젝트에서 추구하는점임과 동시에, 가장 어려운 지점이었다. Map페이지와 Summary, Detail 페이지를 parallel routes를 통해서 <u>3중으로 중첩되게</u> 하면서도 <u>url에 따라서 동적으로 변화하게</u> 하려고 하다보니 <b>폴더구조가 엄청 복잡해졌다.</b> Next.js의 `parallel routes`는 새로고침시 `fallback`이 발생시키기 때문에 `default.tsx`를 통해서아래와 같이 폴더구조를 짰을 때 이를 처리해야하는데 막히는 부분이 발생했다. 처음 화면은 잘나오는데 새로고침시 404가 뜨는 에러가 발생했다. 첫화면 렌더링도 잘되고 라우팅도 잘되고 거의 다 잘됐었는데 한 부분에서만 404가 발생했다.
+  <img width="539" alt="스크린샷 2024-02-15 오후 4 34 47" src="https://github.com/namu2267/IYO/assets/104307414/34b3f4e5-a884-4497-a039-8a899003737d">
+  거의 다 온 것같은데 방식을 바꿔야해서 개인적으로 너무 아쉬웠다.
+
+- 모달을 이용하여 처리하는 방법을 생각했으나, 그 방식을 이용하기 위해서는 `useState`를 사용해야했다. 이것은 `‘use client’`를 통한 `CSR`페이지로의 전환을 의미했다. 따라서 그것을 피하기 위해서 현재와 같은 폴더 구조로 만들었다. 배포일을 설정해뒀기때문에 그 전까지 내가 할 수 있는 한에서 (CSR페이지로 만들지 않으면서) 최선의 구조가 지금의 폴더 구조였다.
+
+- 이때 고민했던 점은 Summary페이지와 Deatail페이지를 모달을 통한 CSR페이지를 만들고, SEO가 가능하면서 url로도 접근이 가능한 SSR페이지도 만드는 것이었다. 이렇게 하면 각각 Summary, Detail은 CSR, SSR 2개의 페이지를 가지게 된다.
+  이 방식이 지금의 방법보다 더 좋은 방법일 수도 있다. Next.js의 parallel routes에 대한 이해부족을 원인으로 생각하여 이 부분에 대해서 더 공부할 예정이다. 또한 코드의 리팩토링을 진행하면서 더 나은 방법을 찾으면 구조를 변경할 것이다.
+
+## <br>
+
 ## 시연영상
 
-![IYO 화면기록](https://github.com/namu2267/IYO/assets/104307414/d10ccfd9-eace-4d70-a2f5-a9f9f9750286)
+![IYO 화면기록 read](https://github.com/namu2267/IYO/assets/104307414/8bbf4f2c-3bde-4c81-86d3-cd8426a14b43)
 
 ## <br>
 

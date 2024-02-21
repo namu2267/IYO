@@ -78,7 +78,6 @@ const Map = () => {
 
   useEffect(() => {
     pinsData.forEach((pin) => {
-      console.log("pin", pin);
       if (mapRef.current == null) return;
       const marker = getMarker(mapRef.current, pin);
       marker.addListener("click", () => {

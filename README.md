@@ -9,9 +9,17 @@
 4. 협업툴: ![Notion Badge](https://img.shields.io/badge/Notion-000?logo=notion&logoColor=fff&style=plastic) ![Discord Badge](https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=fff&style=plastic)
 5. 배포툴: ![Vercel Badge](https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=fff&style=plastic)
 
+---
+
 <br />
 
+## 시연영상
+
+![IYO 화면기록 read](https://github.com/namu2267/IYO/assets/104307414/8bbf4f2c-3bde-4c81-86d3-cd8426a14b43)
+
 ---
+
+<br />
 
 ## 👀 프로젝트 배경
 
@@ -20,14 +28,14 @@
 > 이 페이지에서 쓰이는 사진은 업체제공사진과 내가 직접 찍은 사진들이다.<br> 대략적인 기획 후에는 Figma를 통해 UI를 만들었다. 이렇게 만든 UI를 바탕으로 next.js로 작업하였다.<br>
 > 낮에는 시간이 나지 않아, 주로 저녁시간과 주말을 이용하여 작업하였다.
 
-## <br />
+<br />
 
 ## ✔️ 본 프로젝트에서 내가 지향한 것
 
 > next.js를 제대로 이해하고 사용하고 싶었다. <br>
 > 따라서 최대한 page.tsx에서는 'use client'를 사용하지 않도록 노력했다. next.js의 최대 장점 중 하나가 바로 SEO라고 생각하기 때문에 그 장점을 최대한 살리는 방향으로 코드를 짜고자 했다. 유저의 이벤트가 발생하는 부분만 컴포넌트로 빼서 CSR이 이루어지게 했고, 정적으로 정보를 표현하는 부분들은 SSR이 이루어지도록 했다.
 
-## <br />
+<br />
 
 ## ▶️ 실행 방법
 
@@ -40,16 +48,22 @@ $ npm run dev
 
 ```
 
-## ▶️ 서버가 부재할 경우를 대비한 백엔드 실행방법
+## ▶️ 배포된 서버가 셧다운 될 경우 서버 실행방법
 
 ```shell
-# 백엔드 (node version v21.6.0 사용 중)
+# 백엔드 (node version ^16.20.2 환경에서 개발)
 $ git clone https://github.com/hjpark625/iyo-backend.git
 $ cd iyo-backend
-$ npm install
-$ nvm use
+$ nvm use # nvm을 사용하는 경우
+$ pnpm install
 $ pnpm run start:dev
+```
 
+```plaintext
+.env.example
+
+PORT=서버 포트
+MONGO_URI=MongoDB URI
 ```
 
 <br />
@@ -175,7 +189,7 @@ $ pnpm run start:dev
 
 ---
 
-##🌚 .env
+## 🌚 .env
 
 ```
 NEXT_PUBLIC_NAVER_API_KEY=발급받은 개인 naverAPI KEY
@@ -214,36 +228,39 @@ const mapOptions = {
 
 - 원하는 위치에 마커를 생성하기 위해 `naver.maps.Marker`클래스 객체를 생성한다.
 
-```typescript
-const getMarker = (map: naver.maps.Map, pos: { lat: number; lng: number }) => {
-  const marker = new naver.maps.Marker({
-    position: new naver.maps.LatLng(pos.lat, pos.lng),
-    map,
-  });
-  return marker;
-};
-```
+  ```typescript
+  const getMarker = (
+    map: naver.maps.Map,
+    pos: { lat: number; lng: number }
+  ) => {
+    const marker = new naver.maps.Marker({
+      position: new naver.maps.LatLng(pos.lat, pos.lng),
+      map,
+    });
+    return marker;
+  };
+  ```
 
-- 소품샵의 데이터를 `fetch()`를 통해 서버에서 받아온다. <br>
+- 소품샵의 데이터를 `fetch()`를 통해 서버에서 받아온다.  
   ("Access-Control-Allow-Origin"은 cors에러로 인해 임시적으로 지정하였다)
 
-```typescript
-const [pinsData, setPinsData] = useState<PinData[]>([]);
+  ```typescript
+  const [pinsData, setPinsData] = useState<PinData[]>([]);
 
-const getPins = async () => {
-  const response = await fetch("https://new-todos.site/pins", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-    },
-  });
+  const getPins = async () => {
+    const response = await fetch('https://new-todos.site/pins', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
 
-  const { pins }: { pins: PinData[] } = await response.json();
-  setPinsData(pins);
-  return;
-};
-```
+    const { pins }: { pins: PinData[] } = await response.json();
+    setPinsData(pins);
+    return;
+  };
+  ```
 
 <br>
 
@@ -251,18 +268,17 @@ const getPins = async () => {
 
 - javascript의 `addEventListener`의 click이벤트를 이용하여 해당 유저가 해당 마커를 클릭하였을 때 summary의 해당 소품샵으로 이동한다.
 - next.js의 client side 화면이동시 필요한 `useRouter`를 사용하여, /summary/pin.engName 페이지로 이동한다.
-
-```typescript
-useEffect(() => {
-  pinsData.forEach((pin) => {
-    if (mapRef.current == null) return;
-    const marker = getMarker(mapRef.current, pin);
-    marker.addListener("click", () => {
-      router.push(`/summary/${pin.engName}`);
+  ```typescript
+  useEffect(() => {
+    pinsData.forEach((pin) => {
+      if (mapRef.current == null) return;
+      const marker = getMarker(mapRef.current, pin);
+      marker.addListener('click', () => {
+        router.push(`/summary/${pin.engName}`);
+      });
     });
-  });
-}, [pinsData]);
-```
+  }, [pinsData]);
+  ```
 
 <br>
 
@@ -280,10 +296,11 @@ useEffect(() => {
 
 - next.js의 @를 이용하여 <u>2개의 다른 페이지를 한 화면에서 볼 수 있도록</u> parallel 라우팅을 구현하였다.
 
-  <img width="262" alt="스크린샷 2024-02-19 오후 7 32 04" src="https://github.com/namu2267/IYO/assets/104307414/849e809c-195b-4c61-9bd4-8ceffad3fde7">
+    <img width="262" alt="스크린샷 2024-02-19 오후 7 32 04" src="https://github.com/namu2267/IYO/assets/104307414/849e809c-195b-4c61-9bd4-8ceffad3fde7">  
+    
+    ![@@](https://github.com/namu2267/IYO/assets/104307414/e254a762-e62e-44ca-aa31-8a9b3d5b942d)
 
-![@@](https://github.com/namu2267/IYO/assets/104307414/e254a762-e62e-44ca-aa31-8a9b3d5b942d)
-<br>
+  <br>
 
 - parallel routes는 fallback이 발생하여 404에러가 뜰 수 있으므로 default.tsx를 만들어 이를 해결하였다.
 
@@ -293,8 +310,8 @@ useEffect(() => {
 
 #### 2.`[slug]`통한 Dynamic Routes 구현
 
-- next.js의 [slug]를 이용하여 파라미터를 동적으로 라우팅한다.
-  <img width="232" alt="스크린샷 2024-02-19 오후 7 50 48" src="https://github.com/namu2267/IYO/assets/104307414/5988999b-1c5e-4be1-950c-6fe56524047e">
+- next.js의 [slug]를 이용하여 파라미터를 동적으로 라우팅한다.  
+  ![스크린샷 2024-02-19 오후 7 50 48](https://github.com/namu2267/IYO/assets/104307414/5988999b-1c5e-4be1-950c-6fe56524047e)
 
 <br>
 
@@ -316,21 +333,20 @@ useEffect(() => {
 
 - summary 페이지의 메인이미지는 유저가 누르면 바로 보여야 하기 때문에 lazy loading이 되면 안된다. 따라서 이 기능을 끄기 위해서 속성에 priority를 부여하였다.
 
-```typescript
+```tsx
 <div className="relative w-full h-96">
   <Image
     key={storeData.storeImages[0].photoId}
     src={storeData.storeImages[0].file_path}
-    alt={storeData.engName + "메인사진"}
+    alt={storeData.engName + '메인사진'}
     fill
     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-    style={{ objectFit: "cover" }}
+    style={{ objectFit: 'cover' }}
     priority={true}
   />
 </div>
 ```
 
-<br>
 <br>
 
 ### `params`를 통해 파라미터에 접근, 서버 API받아오기
@@ -345,10 +361,10 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
   const storeParams = params?.storename;
 
   const res = await fetch(`https://new-todos.site/detail/${storeParams}`, {
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "*",
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
     },
   });
 
@@ -365,23 +381,19 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 
 ### Next.js의 폴더구조를 이용한 중첩라우팅
 
-- Next.js의 폴더구조를 이용한 중첩라우팅은 이 프로젝트에서 추구하는점임과 동시에, 가장 어려운 지점이었다. Map페이지와 Summary, Detail 페이지를 parallel routes를 통해서 <u>3중으로 중첩되게</u> 하면서도 <u>url에 따라서 동적으로 변화하게</u> 하려고 하다보니 <b>폴더구조가 엄청 복잡해졌다.</b> Next.js의 `parallel routes`는 새로고침시 `fallback`이 발생시키기 때문에 `default.tsx`를 통해서아래와 같이 폴더구조를 짰을 때 이를 처리해야하는데 막히는 부분이 발생했다. 처음 화면은 잘나오는데 새로고침시 404가 뜨는 에러가 발생했다. 첫화면 렌더링도 잘되고 라우팅도 잘되고 거의 다 잘됐었는데 한 부분에서만 404가 발생했다.
-  <img width="539" alt="스크린샷 2024-02-15 오후 4 34 47" src="https://github.com/namu2267/IYO/assets/104307414/34b3f4e5-a884-4497-a039-8a899003737d">
+- Next.js의 폴더구조를 이용한 중첩라우팅은 이 프로젝트에서 추구하는점임과 동시에, 가장 어려운 지점이었다. Map페이지와 Summary, Detail 페이지를 parallel routes를 통해서 <u>3중으로 중첩되게</u> 하면서도 <u>url에 따라서 동적으로 변화하게</u> 하려고 하다보니 <b>폴더구조가 엄청 복잡해졌다.</b> Next.js의 `parallel routes`는 새로고침시 `fallback`이 발생시키기 때문에 `default.tsx`를 통해서아래와 같이 폴더구조를 짰을 때 이를 처리해야하는데 막히는 부분이 발생했다. 처음 화면은 잘나오는데 새로고침시 404가 뜨는 에러가 발생했다. 첫화면 렌더링도 잘되고 라우팅도 잘되고 거의 다 잘됐었는데 한 부분에서만 404가 발생했다.  
+   ![스크린샷 2024-02-15 오후 4 34 47](https://github.com/namu2267/IYO/assets/104307414/34b3f4e5-a884-4497-a039-8a899003737d)
   거의 다 온 것같은데 방식을 바꿔야해서 개인적으로 너무 아쉬웠다.
 
 - 모달을 이용하여 처리하는 방법을 생각했으나, 그 방식을 이용하기 위해서는 `useState`를 사용해야했다. 이것은 `‘use client’`를 통한 `CSR`페이지로의 전환을 의미했다. 따라서 그것을 피하기 위해서 현재와 같은 폴더 구조로 만들었다. 배포일을 설정해뒀기때문에 그 전까지 내가 할 수 있는 한에서 (CSR페이지로 만들지 않으면서) 최선의 구조가 지금의 폴더 구조였다.
 
-- 이때 고민했던 점은 Summary페이지와 Deatail페이지를 모달을 통한 CSR페이지를 만들고, SEO가 가능하면서 url로도 접근이 가능한 SSR페이지도 만드는 것이었다. 이렇게 하면 각각 Summary, Detail은 CSR, SSR 2개의 페이지를 가지게 된다.
+- 이때 고민했던 점은 Summary페이지와 Detail페이지를 모달을 통한 CSR페이지를 만들고, SEO가 가능하면서 url로도 접근이 가능한 SSR페이지도 만드는 것이었다. 이렇게 하면 각각 Summary, Detail은 CSR, SSR 2개의 페이지를 가지게 된다.
   이 방식이 지금의 방법보다 더 좋은 방법일 수도 있다. Next.js의 parallel routes에 대한 이해부족을 원인으로 생각하여 이 부분에 대해서 더 공부할 예정이다. 또한 코드의 리팩토링을 진행하면서 더 나은 방법을 찾으면 구조를 변경할 것이다.
 
-## <br>
-
-## 시연영상
-
-![IYO 화면기록 read](https://github.com/namu2267/IYO/assets/104307414/8bbf4f2c-3bde-4c81-86d3-cd8426a14b43)
-
-## <br>
+<br>
 
 ## 🚀 추후 일정
 
-vercel로 배포를 완료했지만 더 추가하고 싶은 기능들이 있고, 디자인적으로도 더 보완이 필요하다. <br> 특히, meta태그, robust.txt를 활용하여 SEO에 최적화시키고 싶다. <br> IYO프로젝트는 CICD를 통해서 develop해 나갈 예정이다.
+vercel로 배포를 완료했지만 더 추가하고 싶은 기능들이 있고, 디자인적으로도 더 보완이 필요하다.  
+특히, meta태그, robust.txt를 활용하여 SEO에 최적화시키고 싶다.  
+IYO프로젝트는 CI/CD를 통해서 develop해 나갈 예정이다.

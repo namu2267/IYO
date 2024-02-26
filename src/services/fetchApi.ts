@@ -1,4 +1,4 @@
-import { MainDB } from "@/types/storeTypse";
+import { MainDB } from "@/types/storeTypes";
 
 export const getMainDb = async (storeParams?: string) => {
   const res = await fetch(`http://localhost:4000/detail/${storeParams}`, {

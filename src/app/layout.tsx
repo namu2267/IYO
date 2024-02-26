@@ -5,8 +5,13 @@ import Script from "next/script";
 const mapAPIKey = process.env.NEXT_PUBLIC_NAVER_MAP_API_CLIENT_ID;
 
 export const metadata: Metadata = {
-  title: "소품샵 찾기, IYO",
+  title: {
+    default: "소품샵 찾기, IYO",
+    template: "IYO | %s",
+  },
   description: "주위의 이쁜 소품샵을 알려드려요.",
+  keywords: "소품샵, 소품, 놀거리, 구경",
+  metadataBase: new URL("http://localhost:3000"),
 };
 
 export default function RootLayout({

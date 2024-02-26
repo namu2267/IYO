@@ -74,8 +74,9 @@ MONGO_URI=MongoDB URI
 
 <br/>
 
-> https://iyo.vercel.app/
+> ~~https://iyo.vercel.app/~~
 
+비용문제로 서버 내림
 <br/>
 
 ---
@@ -248,11 +249,11 @@ const mapOptions = {
   const [pinsData, setPinsData] = useState<PinData[]>([]);
 
   const getPins = async () => {
-    const response = await fetch('https://new-todos.site/pins', {
-      method: 'GET',
+    const response = await fetch("https://new-todos.site/pins", {
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     });
 
@@ -273,7 +274,7 @@ const mapOptions = {
     pinsData.forEach((pin) => {
       if (mapRef.current == null) return;
       const marker = getMarker(mapRef.current, pin);
-      marker.addListener('click', () => {
+      marker.addListener("click", () => {
         router.push(`/summary/${pin.engName}`);
       });
     });
@@ -338,10 +339,10 @@ const mapOptions = {
   <Image
     key={storeData.storeImages[0].photoId}
     src={storeData.storeImages[0].file_path}
-    alt={storeData.engName + '메인사진'}
+    alt={storeData.engName + "메인사진"}
     fill
     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-    style={{ objectFit: 'cover' }}
+    style={{ objectFit: "cover" }}
     priority={true}
   />
 </div>
@@ -361,10 +362,10 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
   const storeParams = params?.storename;
 
   const res = await fetch(`https://new-todos.site/detail/${storeParams}`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
   });
 
@@ -381,8 +382,9 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 
 ### Next.js의 폴더구조를 이용한 중첩라우팅
 
-- Next.js의 폴더구조를 이용한 중첩라우팅은 이 프로젝트에서 추구하는점임과 동시에, 가장 어려운 지점이었다. Map페이지와 Summary, Detail 페이지를 parallel routes를 통해서 <u>3중으로 중첩되게</u> 하면서도 <u>url에 따라서 동적으로 변화하게</u> 하려고 하다보니 <b>폴더구조가 엄청 복잡해졌다.</b> Next.js의 `parallel routes`는 새로고침시 `fallback`이 발생시키기 때문에 `default.tsx`를 통해서아래와 같이 폴더구조를 짰을 때 이를 처리해야하는데 막히는 부분이 발생했다. 처음 화면은 잘나오는데 새로고침시 404가 뜨는 에러가 발생했다. 첫화면 렌더링도 잘되고 라우팅도 잘되고 거의 다 잘됐었는데 한 부분에서만 404가 발생했다.  
-   ![스크린샷 2024-02-15 오후 4 34 47](https://github.com/namu2267/IYO/assets/104307414/34b3f4e5-a884-4497-a039-8a899003737d)
+- Next.js의 폴더구조를 이용한 중첩라우팅은 이 프로젝트에서 추구하는 점임과 동시에, 가장 어려운 지점이었다. Map페이지와 Summary, Detail 페이지를 parallel routes를 통해서 <u>3중으로 중첩되게</u> 하면서도 <u>url에 따라서 동적으로 변화하게</u> 하려고 하다보니 <b>폴더구조가 엄청 복잡해졌다.</b> Next.js의 `parallel routes`는 새로고침시 `fallback`이 발생시키기 때문에 `default.tsx`를 통해서
+  처리해야 한다. 아래와 같이 폴더 구조를 짰을 때 폴더 구조가 복잡해지면서 이 문제를 해결하는데에서 막혔다. 처음 화면은 잘나오는데 새로고침시 404가 뜨는 에러가 발생했다. 첫화면 렌더링도 잘되고 라우팅도 잘되고 거의 다 잘됐었는데 한 부분에서만 404가 발생했다. (Next.js의 폴더구조에 대한 이해부족을 원인으로 생각하여 추후 공부하여 보완할 예정이다.)
+  ![스크린샷 2024-02-15 오후 4 34 47](https://github.com/namu2267/IYO/assets/104307414/34b3f4e5-a884-4497-a039-8a899003737d)
   거의 다 온 것같은데 방식을 바꿔야해서 개인적으로 너무 아쉬웠다.
 
 - 모달을 이용하여 처리하는 방법을 생각했으나, 그 방식을 이용하기 위해서는 `useState`를 사용해야했다. 이것은 `‘use client’`를 통한 `CSR`페이지로의 전환을 의미했다. 따라서 그것을 피하기 위해서 현재와 같은 폴더 구조로 만들었다. 배포일을 설정해뒀기때문에 그 전까지 내가 할 수 있는 한에서 (CSR페이지로 만들지 않으면서) 최선의 구조가 지금의 폴더 구조였다.
@@ -395,5 +397,5 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 ## 🚀 추후 일정
 
 vercel로 배포를 완료했지만 더 추가하고 싶은 기능들이 있고, 디자인적으로도 더 보완이 필요하다.  
-특히, meta태그, robust.txt를 활용하여 SEO에 최적화시키고 싶다.  
-IYO프로젝트는 CI/CD를 통해서 develop해 나갈 예정이다.
+특히, meta태그, robust.txt를 활용하여 SEO에 최적화시키고 싶다. 또한 반복되는 코드들을 정리하여 조금 더 코드의 가독성을 올리고자 한다.  
+서버 비용문제로 배포된 프로덕션은 현재 내린 상태로 local에서 아쉬운 부분들에 대한 리팩토링을 진행할 예정이다.

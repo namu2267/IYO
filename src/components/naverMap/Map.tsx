@@ -22,7 +22,7 @@ const Map = () => {
   const [pinsData, setPinsData] = useState<PinData[]>([]);
 
   const getPins = async () => {
-    const response = await fetch("http://localhost:4000/pins", {
+    const response = await fetch("https://new-todos.site/pins", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

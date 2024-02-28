@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   description: "주위의 이쁜 소품샵을 알려드려요.",
   keywords: "소품샵, 소품, 놀거리, 구경",
-  metadataBase: new URL("http://localhost:3000"),
+  metadataBase: new URL("https://iyo.vercel.app/"),
 };
 
 export default function RootLayout({

@@ -74,9 +74,8 @@ MONGO_URI=MongoDB URI
 
 <br/>
 
-> ~~https://iyo.vercel.app/~~
+> https://iyo.vercel.app/
 
-비용문제로 서버 내림
 <br/>
 
 ---
@@ -397,5 +396,4 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 ## 🚀 추후 일정
 
 vercel로 배포를 완료했지만 더 추가하고 싶은 기능들이 있고, 디자인적으로도 더 보완이 필요하다.  
-특히, meta태그, robust.txt를 활용하여 SEO에 최적화시키고 싶다. 또한 반복되는 코드들을 정리하여 조금 더 코드의 가독성을 올리고자 한다.  
-서버 비용문제로 배포된 프로덕션은 현재 내린 상태로 local에서 아쉬운 부분들에 대한 리팩토링을 진행할 예정이다.
+특히, meta태그, robust.txt를 활용하여 SEO에 최적화시키고 싶다. 또한 리팩도링을 통해 반복되는 코드들을 정리하여 조금 더 코드의 가독성을 올리고자 한다.

@@ -17,9 +17,7 @@ export const generateMetadata = async ({
   return {
     title: `${storeData.name}`,
     description: `${storeData?.introduce}`,
-    metadataBase: new URL(
-      `https://new-todos.site/summary/${storeData.engName}`
-    ),
+    metadataBase: new URL(`https://new-todos.site/detail/${storeData.engName}`),
     keywords: `${storeData.name},${storeData.category},${storeData.address}, 
     ${storeData.concept}, 소품샵`,
   };

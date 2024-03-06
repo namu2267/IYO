@@ -76,7 +76,7 @@ MONGO_URI=MongoDB URI
 
 > ~~https://iyo.vercel.app/~~
 
-비용문제로 서버 내림
+서버 비용문제로 배포 내림
 <br/>
 
 ---
@@ -376,6 +376,62 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 
 <br>
 
+### `<meta>`태그를 통한 검색엔진최적화(SEO)
+
+✅ 결과: Google lighthouse SEO점수 100점
+<img width="1296" alt="image" src="https://github.com/namu2267/IYO/assets/104307414/964302a8-f304-4691-ba67-b4907e944fa4">
+
+1. metadata와 레이아웃의 분리 ➡️ 코드의 가독성 향상
+
+- 각 폴더의 page.tsx에는 metadata와 서버를 fetch하는 코드만 남겨 가독성을 높인다.
+- 레이아웃에 관련된 코드들은 컴포넌트로 따로 빼고 props를 통해서 fetch를 통해 받아온 데이터를 넘겨준다.
+
+2. 페이지별로 다른 metadata의 제공을 통한 SEO 개선
+
+- RootLayout뿐만 아니라, summary페이지, detail페이지 각각의 meta데이터를 형성함으로써 SEO를 추구하였다.
+
+3. generateMetadata를 통한 동적 metadata제공
+
+- generateMetadata를 통해서 fetch를 동해 동적으로 들어오는 데이터를 metadata로 활용한다.
+- 이를 통해 각 페이지별로 더 향상된 SEO를 제공한다.
+
+<br>
+✔️ 정적인 RootLayout의 metadata
+
+```typescript
+//app> layout.tsx
+export const metadata: Metadata = {
+  title: {
+    default: "소품샵 찾기, IYO",
+    template: "IYO | %s",
+  },
+  description: "주위의 이쁜 소품샵을 알려드려요.",
+  keywords: "소품샵, 소품, 놀거리, 구경",
+  metadataBase: new URL("https://iyo.vercel.app/"),
+};
+```
+
+✔️ 동적인 summary의 metadata
+
+```typescript
+// summary.tsx
+export const generateMetadata = async ({
+  params,
+}: Storename): Promise<Metadata> => {
+  const storeData = await getStoreDB({ params });
+
+  return {
+    title: `${storeData.name}`,
+    description: `${storeData?.introduce}`,
+    metadataBase: new URL(
+      `https://new-todos.site/summary/${storeData.engName}`
+    ),
+    keywords: `${storeData.name},${storeData.category},${storeData.address}, 
+    ${storeData.concept}, 소품샵`,
+  };
+};
+```
+
 ---
 
 ## 이 프로젝트에서 가장 어려웠던 점
@@ -396,6 +452,6 @@ const Page = async ({ params }: { params?: { storename: string } }) => {
 
 ## 🚀 추후 일정
 
-vercel로 배포를 완료했지만 더 추가하고 싶은 기능들이 있고, 디자인적으로도 더 보완이 필요하다.  
-특히, meta태그, robust.txt를 활용하여 SEO에 최적화시키고 싶다. 또한 반복되는 코드들을 정리하여 조금 더 코드의 가독성을 올리고자 한다.  
-서버 비용문제로 배포된 프로덕션은 현재 내린 상태로 local에서 아쉬운 부분들에 대한 리팩토링을 진행할 예정이다.
+이 프로젝트에서 meta태그를 활용한 SEO향상을 추구했는데 ver1에서 어느정도는 이루어진것 같다. meta태그를 활용했는데 추후에는 robust.txt도 사용해보고 싶다.  
+또한 이후 버전에는 admin페이지를 만들어서 데이터를 관리자가 수정, 삭제, 추가하는 기능을 넣고자 한다.  
+리팩토링도 계속 진행하여 더 나은 폴더구조를 만들고, 코드의 가독성도 올리고 싶다.
